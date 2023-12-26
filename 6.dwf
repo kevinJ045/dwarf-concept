@@ -1,0 +1,25 @@
+import Forge : { Thread, ThreadContext };
+
+Thread thread = Thread((context: ThreadContext) => {
+
+	// doSomethingLong
+
+	if(success){
+		context.done(data);
+	} else {
+		context.error(data);
+	}
+
+});
+
+thread
+	.wait(5)
+	.stop();
+
+thread.on('done', (data) => {
+	print(data);
+});
+
+thread.on('error', (data) => {
+	print(data);
+});

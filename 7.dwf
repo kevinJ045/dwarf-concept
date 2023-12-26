@@ -1,0 +1,25 @@
+
+@use async;
+
+
+
+async func asyncFunction() Dwarf.lang.Future<str> {
+	// Dwarf.lang.Future can be accessed with just Future
+	return Future<str>(
+		(resolve: () => void) => {
+			Dwarf.process.sleep(10);
+			// Dwarf.process.sleep can be accessed with just sleep();
+			resolve("hello");
+		}
+	)
+}
+
+asyncFunction()
+.then(response => {
+	print(response);
+});
+
+// or
+
+str response = await asyncFunction();
+print(response);

@@ -1,0 +1,40 @@
+import Rune : {
+	Client,
+	Database,
+	Collection,
+	KeyTypes
+};
+
+@use async;
+
+Client client = Client({ url: 'drfrn://127.0.0.1:54122' });
+await client.connect();
+
+
+Database db = client.db('test', { create: true });
+
+Collection users = db.collection('users');
+users.key('id', [KeyTypes.primary, KeyTypes.auto]);
+
+interface User {
+	name: str,
+	username: pattern[32] // pattern[number] means this type can be a string of only number chars
+}
+
+await users
+	.insert(User {
+		name: "hello",
+		username: "hello"
+	}, User {
+		name: "hi",
+		username: "test"
+	})
+
+await users
+	.fetch<User[]>();
+
+await users
+	.fetch<User[]>({
+		username: "hello"
+	})
+	.first();

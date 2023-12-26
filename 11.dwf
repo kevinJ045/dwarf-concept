@@ -1,0 +1,8 @@
+
+
+let a: pattern[2] = "aa"; // only allows exactly two charachters
+let b: pattern[-2] = "b"; // allows only less than two characters
+let c: pattern[+2] = "ccc"; // allows only more than two characters
+
+
+let f: pattern[/http(.+)/] = "http://something.com"; // Regex Typing, if the string doesn't match the pattern it can't be assigned

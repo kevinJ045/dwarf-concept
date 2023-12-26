@@ -1,0 +1,32 @@
+import GUI;
+import WindNet as namespace Wind;
+import .urls : { baseURL };
+
+interface DataFromServer {
+	text: str
+}
+
+Widget myWidget = Widget(
+	children: [
+		Text('Hi'),
+	]
+);
+
+
+myWidget
+	+ Text('Hello')
+	+ Text('Good morning')
+	+ Text('What\'s up');
+
+
+Wind
+	.get(baseURL)
+	.queue()
+	.json<DataFromServer[]>()
+	.forEach(
+		model => {
+			(myWidget + Text(model.text)) if model.text ?is str;
+			// or
+			// myWidget.add(Text(model.text));
+		}
+	);

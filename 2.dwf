@@ -1,0 +1,70 @@
+// An example about simple functions
+
+
+int giveMeNumbers(){
+	return 0;
+}
+
+type giveMeNumbers(); // 0
+
+func giveMeNumberOrString() int | str {
+	return "string";
+}
+
+type giveMeNumbers(); // string
+
+/*
+Just like variables, functions also come single typed and multip typed
+*/
+
+
+// Arguments also come in multi or single typing.
+int add(int num1, num2: int = 0){
+	return num1 + num2;
+}
+
+type add(1, 2);
+
+
+// Keyed arguments
+int addKeyed(
+	int key num1,
+	key num2: int = 0; 
+) {
+	return num1 + num2;
+}
+
+type addKeyed(num1: 1, num2: 2);
+
+
+// async
+
+async int functionAsync() Future<str> {
+	// when default is set, whenever a variable is null, it falls back to
+	// it's default state
+	int name = await something()
+						 default = "";
+	return name;
+}
+
+functionAsync()
+	.done(
+		(value: str) => type str 
+	)
+
+
+// lambda
+let lambda: () => void = () {
+	// ...
+}
+
+let addLambda = (dyn num1, num2: dyn = 0) => num1 + num2;
+type addLambda(1, 2); // 3;
+
+let lambdaTyped = () void {
+	// ...
+}
+
+dyn lambdaTypedPlus: (arg: str) => str = (str arg) str {
+	return "string" as str;
+}

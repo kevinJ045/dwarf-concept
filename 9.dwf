@@ -1,0 +1,104 @@
+import Pebbles : {
+	Iterable,
+	range,
+	IterableContext
+};
+
+Iterable.repeat(10, (index: int){
+	print(index);
+});
+
+
+@Iterable.iterate ( range(10) )
+(item: int, index: int) {
+	print(index);
+}
+
+int[] nums = [1..10];
+
+@Iterable.iterate ( nums )
+(item: int, index: int, ctx: IterableContext) {
+	// ctx.iterable is the array given
+	print("${index}th item is $item from ${ctx.iterable}");
+}
+
+// You can also use
+
+Iterable.iterate(nums)(() { /* ... */ });
+
+/*
+ Although, you can use Iterable for iterating through arrays, you can use
+ normal array iteration too.
+*/
+
+let array: Array<int> = [0..100];
+
+array.forEach((item: any, index: int, array: any[]) {
+	// ...
+});
+
+let map: Map<str, str> = Map();
+
+map.forEach((key: str, value: str, map: Map){
+	// ...
+});
+
+let object: Object = {
+	name: 'something',
+	items: (
+		key: value,
+		anotherKey: anotherValue,
+		array: 
+			- key: value
+				something: somethingElse
+	)
+};
+
+Object.iterate(object, (key: str, value: any, object: Object){
+	// ...
+}, {
+	readonly: true,
+	enumerable: true
+});
+
+
+// Also use for loops
+for(let i in array){
+	print(i); // i is index
+}
+
+for(let i of array){
+	print(i); // i is value
+}
+
+
+@Iterablel.extends
+class CustomIterableClass {
+
+
+	str[] [Symbol.iterate.keys](){
+		return [/* a list of Symbol or str to use as keys */];
+	}
+
+	any[] [Symbol.iterate.values](){
+		return [/* a list of all values */];
+	}
+
+	[str, any][] [Symbol.iterate.entries](){
+		return [/* a list of all values and keys mapped as [key, value] */];
+	}
+}
+
+let myIterable = CustomIterableClass();
+
+// Gets the Symbol.iterate.keys
+for(let i in myIterable){}
+
+// Gets the Symbol.iterate.values
+for(let i of myIterable){}
+
+// Gets the Symbol.iterate.entries
+@Iterable.iterate (myIterable)
+(){
+	// ...
+}

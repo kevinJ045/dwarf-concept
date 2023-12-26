@@ -1,0 +1,44 @@
+// Classes
+
+interface PersonInterface {
+	dyn name: str = "" default = "";
+	dyn age: int = 0 default = 0;
+}
+
+class Person implements PersonInterface {
+
+	dyn acquaintance: Person[] = [] default = [];
+
+	Person(
+		str key this.name,
+		int key this.age
+	)
+
+	grow(int growth = 0){
+		age += growth;
+	}
+
+	talk(speech: str){
+		print(speech.format(this));
+	}
+
+	operation + (addition: any){
+		if(addition ?is int){
+			grow(addition);
+		} else if(addition ?instance Person){
+			push addition acquaintance;
+		} else {
+			throw Error("Addition must be a person or an int");
+		}
+	}
+}
+
+
+let me: Person = Person(name: "Me", age: 19);
+me.grow(1);
+me + 2;
+me.talk("My name is \$name, I am \$age years old.");
+// My name is Me, I am 22 years old.
+
+type me.name; // Me
+type me.age; // 20

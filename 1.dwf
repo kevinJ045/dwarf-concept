@@ -1,0 +1,26 @@
+// Here is an example about variables
+
+let a = 0;
+
+// type is an output command
+type a;
+
+let b = 1;
+
+let c = a + b;
+
+type c;
+
+
+
+
+let num: int = 0;
+// or
+int num = 0;
+
+
+// Typed Declarations.
+// this will only hold one type
+int num = 0;
+// while this can be more than just one type
+let num: int | dbl = 1.0;

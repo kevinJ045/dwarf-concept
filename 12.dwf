@@ -8,11 +8,11 @@ import Rune : {
 
 @use async;
 
-Client client = Client(src: './local.db', local: true);
+Client client = Client(src: './local.db', local: true, relational: true);
 
-RelationalDatabase db = RelationalDatabase(
+RelationalDatabase db = client.db(
 	name: 'db'
-); 
+);
 
 Table table = db.table('table',
 	createIfMissing: true,

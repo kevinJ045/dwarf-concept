@@ -28,7 +28,11 @@ Table table2 = db.table('table2',
 	columns: {
 		id: [int, KeyTypes.PRIMARY, KeyTypes.AUTO_INCREMENT],
 		name: [str, KeyTypes.REQUIRED],
-		someprop: [RelationalReference(table, table.keys('id'))], // you can also just put RelationalReference('table', 'id')
+		someprop: [int, RelationalReference(table, table.column('id'))], // you can also just put RelationalReference('table', 'id')
+	}
+	// or
+	references: {
+		someprop: { table: table, column: table.column('id') } // or just 'table' and 'id'
 	}
 );
 
@@ -40,4 +44,4 @@ let item1 = await table.insert({
 let item2 = await table2.insert({
 	name: 'something',
 	someprop: item1.id
-})
+});

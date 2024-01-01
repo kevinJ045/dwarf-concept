@@ -1,1 +1,43 @@
-// ...
+import Rune : {
+	Client,
+	RelationalDatabase,
+	Table,
+	KeyTypes,
+	RelationalReference
+};
+
+@use async;
+
+Client client = Client(src: './local.db', local: true);
+
+RelationalDatabase db = RelationalDatabase(
+	name: 'db'
+); 
+
+Table table = db.table('table',
+	createIfMissing: true,
+	columns: {
+		id: [int, KeyTypes.PRIMARY, KeyTypes.AUTO_INCREMENT],
+		name: [str, KeyTypes.REQUIRED],
+		something: [str[20], KeyTypes.REQUIRED],
+	}
+);
+
+Table table2 = db.table('table2', 
+	createIfMissing: true,
+	columns: {
+		id: [int, KeyTypes.PRIMARY, KeyTypes.AUTO_INCREMENT],
+		name: [str, KeyTypes.REQUIRED],
+		someprop: [RelationalReference(table, table.keys('id'))], // you can also just put RelationalReference('table', 'id')
+	}
+);
+
+let item1 = await table.insert({
+	name: 'Nothing',
+	something: 'something'
+});
+
+let item2 = await table2.insert({
+	name: 'something',
+	someprop: item1.id
+})

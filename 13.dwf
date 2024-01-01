@@ -1,0 +1,22 @@
+import f:.somefile 
+	assert {
+    customOption: "customValue"
+  };
+
+
+
+let name = "somename";
+let id = 1;
+
+
+if(import.assertions.customOption == "customValue"){
+	export default {
+		name, 
+		id
+	};
+} else {
+	export default {
+		name: "none", 
+		id: 0
+	};
+}

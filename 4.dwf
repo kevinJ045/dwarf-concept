@@ -1,0 +1,30 @@
+import Chrono : {
+	Date
+};
+
+let date = Date();
+
+let dateString = date.format('mm dd yyyy');
+
+let timestamp: int = date.time(); // something like 1677788899
+
+
+let timestamp2 = Date.now();
+
+let utcDate = Date( utc: true );
+let timestampUTC = Date.now( utc: true );
+
+
+let year = date.year();
+let mon = date.month();
+let day = date.day();
+let hour = date.hour();
+let minute = date.minute();
+let second = date.second();
+let msecond = date.millisecond();
+
+
+let datefrom = Date.from(timestamp);
+let datefromutc = Date.from(timestamp2, utc: true);
+
+

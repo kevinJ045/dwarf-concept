@@ -56,10 +56,10 @@ let object: Object = {
 
 Object.iterate(object, (key: str, value: any, object: Object){
 	// ...
-}, {
+},
 	readonly: true,
 	enumerable: true
-});
+);
 
 
 // Also use for loops
@@ -72,7 +72,7 @@ for(let i of array){
 }
 
 
-@Iterablel.extends
+@Iterable.extends
 class CustomIterableClass {
 
 

@@ -1,5 +1,3 @@
-// Hello there, this is the basic syntax for dwarf.
-
 #!/usr/bin/env dwarf
 
 @option {
@@ -383,6 +381,27 @@ enum MyConstantList {
 }
 
 
+// Custom Questions.
+question func isWidget(widget: Widget??){
+  //                           ^^^^^^^^ 
+  // This means a type that can be anything but
+  // is most likely a Widget
+  return ?instance widget Widget;
+}
+
+type ?isWidget widget; // true
+type ?isWidget "string"; // false
+
+
+class QuestionableClass {
+  :question(value: QuestionableClass??){
+    return ?instance value QuestionableClass; 
+  }
+}
+
+let q = QuestionableClass();
+type ?QuestionableClass q; // true
+type ?QuestionableClass "not a class"; // false
 
 
 print("%r/Red Text/ normal text %b/Blue Text/") // printing works cool

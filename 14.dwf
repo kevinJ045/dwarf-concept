@@ -1,0 +1,55 @@
+
+class MyClass {}
+
+
+question func isMyClass(item: MyClass??){
+  //                           ^^^^^^^^ 
+  // This means a type that can be anything but
+  // is most likely a MyClass
+  return ?instance item MyClass;
+}
+
+MyClass myClass = MyClass();
+
+type ?isMyClass myClass; // true
+type ?isMyClass 1; // false
+
+
+class MyClassQuestionable {
+  :question(value: MyClassQuestionable??){
+    return ?instance value MyClassQuestionable; 
+  }
+}
+
+MyClassQuestionable myClassQ = MyClassQuestionable();
+
+type ?MyClassQuestionable myClassQ; // true
+
+
+// default questions
+let someInstance = SomeClass();
+int num = 0;
+let string: str = "hello";
+
+// type command is used to type it into the output, like print
+type ?is string; // str
+type ?is num; // int
+
+type ?is string str; // true
+
+type ?is someInstance SomeClass; // false, since someInstance is just an object while SomeClass is a class.
+
+type ?instance  someInstance; // returns SomeClass
+type ?instance  someInstance SomeClass; // true
+
+// to test if classes inherit other classes,
+type ?extends SomeClass; // now it will seek the last inheritance for SomeClass, if it is not inheriting it will return null
+type ?extends root SomeClass; // now it will seek the first inheritance for SomeClass
+
+type ?extends SomeClass SomeOtherClass; // will test if SomeClass extends SomeOtherClass
+
+// just like ?extends there is ?implements for interfaces
+type ?implements SomeClass; // will return the last implemented interface
+type ?implements root SomeClass; // will return the core interface of the implemented interface if the interface implements
+
+type ?implements SomeClass SomeInterface; // will test if SomeClass implements SomeInterface

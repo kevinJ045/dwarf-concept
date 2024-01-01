@@ -1,0 +1,5 @@
+import pkg:custom; 
+
+CustomClass customvar = CustomClass(
+	customOption: 'customValue'
+);

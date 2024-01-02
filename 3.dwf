@@ -33,6 +33,7 @@ class Person implements PersonInterface {
 	}
 }
 
+?is Person constructor; // true
 
 let me: Person = Person(name: "Me", age: 19);
 me.grow(1);

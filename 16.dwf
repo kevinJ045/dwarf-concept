@@ -1,0 +1,13 @@
+
+import pkg:rin as namespace Rin;
+import pkg:rin.ui as namespace Rin.UI;
+import pkg:rin.ui.widgets.TrayBar as TrayBar;
+
+class CustomTrayBar extends TrayBar {
+	// ...
+}
+
+const dyn bar = Rin.UI.find(Rin.UI.NAVIGATION_BAR_ID); // 
+const dyn traybar = bar.find(Rin.UI.TRAYBAR_ID); // 
+
+bar.replace(traybar, CustomTrayBar(/* custom traybar options */));

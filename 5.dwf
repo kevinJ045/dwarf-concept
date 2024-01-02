@@ -1,6 +1,7 @@
-import GUI;
-import WindNet as namespace Wind;
-import .urls : { baseURL };
+import Elysium : { Widget, Text, GUI }; // UI library
+import Wind as namespace Wind;
+import "@/constant/urls" : { baseURL };
+// means "@/constant/urls.dwf" while @ is the project root.
 
 interface DataFromServer {
 	text: str
@@ -30,3 +31,5 @@ Wind
 			// myWidget.add(Text(model.text));
 		}
 	);
+
+GUI.runInApp(myWidget, title: 'Http + GUI Demo');
